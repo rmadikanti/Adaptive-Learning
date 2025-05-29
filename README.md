@@ -185,7 +185,7 @@ We had hoped to use an unconstrained `autogen.GroupChatManager` to manage agent 
 The console knowledge tracer program uses direct agent communication.
 
 
-### Spring 2025 (May)
+### SU25 (May)
 
 - **Enhanced Autogen JSON Output**
   - Added structured fields: `topic`, `timestamp`, `steps_completed`, `suggestions`.

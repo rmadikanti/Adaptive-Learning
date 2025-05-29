@@ -90,65 +90,6 @@ class CustomGroupChatManager(autogen.GroupChatManager):
             self.messages_from_json = []
             return []
         
-    # def save_messages_to_json(self, filename=None):
-    #     print(f"!!save_messages_to_json() - called !!")
-    #     # Get the current time
-    #     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    #     current_time_filename = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
-    #     # Print the termination message
-    #     print(f"!!! Session has been terminated by user at {current_time} !!!")
-    #     if filename is None:
-    #         filename = self.filename
-    #         print(f"********Process Saving/Exporting the chat to JSON file started*********")
-
-    #     if os.path.exists(filename):
-    #         os.remove(filename)
-    #         print(f"Deleted existing file: {filename}")
-    #     # ---- Create session_id before using it ----
-    #     session_id = uuid.uuid4().hex
-
-    #     chat_history = self.groupchat.messages
-
-    #     #Get the topic , steps_completed & suggestions to load into JSON from user session
-    #     topic  = getattr(self, "topic", "General")
-    #     steps_completed = getattr(self, "steps_completed", [])
-    #     suggestions = getattr(self, "suggestions", [])
-
-
-    #     with open(filename, 'w') as f:
-    #         session_data = {
-    #             "session_id": session_id,
-    #             "user_id": self.user_uid,
-    #             "topic": topic,
-    #             "timestamp": datetime.now().isoformat(),
-    #             "steps_completed": steps_completed,
-    #             "suggestions": suggestions,
-    #             "messages": chat_history
-    #         }
-    #         print(f"Session data saved locally to {filename}.")
-    #         # Save session JSON to original location
-    #         with open(filename, 'w') as f:
-    #             json.dump(session_data, f, indent=2)
-    #             print(f"Session data saved locally to {filename}.")
-
-
-    #         # ---- MOVE THE FOLLOWING BLOCK OUTSIDE THE 'with' ----
-    #         logs_dir = os.path.expanduser("~/Desktop/Adaptive-Learning/logs/")
-    #         os.makedirs(logs_dir, exist_ok=True)
-    #         archive_filename = os.path.join(
-    #             logs_dir, f"{session_data['session_id']}_{current_time_filename}.json"
-    #         )
-    #         shutil.copy(filename, archive_filename)
-    #         print(f"Copied session JSON to archive: {archive_filename}")
-
-
-    #         # ---- Sync session to Firestore ----
-    #         print(f"!!save_session_to_firestore(session_data) - called from save_messages_to_json!!")
-    #         save_session_to_firestore(session_data, self.user_uid)
-    #         print("Session data synced to Firestore.")
-    #     print(f"Chat history saved to: {filename}")
-    #     print(f"********Saving/Exporting the chat to JSON file Finished!*********")
-
     def save_messages_to_json(self, filename=None):
         print(f"!!save_messages_to_json() - called !!")
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

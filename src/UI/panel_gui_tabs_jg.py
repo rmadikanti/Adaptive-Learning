@@ -5,11 +5,12 @@ import os
 import time
 import asyncio
 from typing import List, Dict
-import logging
+import logging, datetime
 from enum import Enum
 from dotenv import load_dotenv
 import requests
-
+from src.Tools.firebase import get_user_from_realtime_db
+from src.Tools.firebase import add_user_to_realtime_db
 
 # --- Panel Auth Imports ---
 import param
@@ -133,6 +134,13 @@ class UserAuth(param.Parameterized):
             result = response.json()
             if 'error' in result:
                 self.error_message.object = f"Error: {result['error']['message']}"
+                # Fetch and print Realtime DB user profile (optional)
+                try:
+                    user_profile = get_user_from_realtime_db(self.user_uid)
+                    print(f"Realtime DB user profile for {self.user_uid}:", user_profile)
+                except Exception as db_err:
+                    print(f"Error fetching user profile from Realtime Database: {db_err}")
+
                 self.user_uid = None
                 self.clear_inputs()
             else:
@@ -166,7 +174,33 @@ class UserAuth(param.Parameterized):
                 'email': encrypted_email.decode('utf-8'),
                 'gender': encrypted_gender.decode('utf-8')
             })
+
+                # >>>> Add User to Realtime DB <<<<
+            try:
+                add_user_to_realtime_db(
+                    user.uid,
+                    {
+                        "email": self.email_input.value,
+                        "name": self.name_input.value,
+                        "gender": self.gender_input.value,
+                    }
+                )
+            except Exception as db_err:
+                print(f"Error adding user to Realtime Database: {db_err}")
+
+
             self.user_uid = user.uid
+            # --- Add to Realtime Database ---
+            add_user_to_realtime_db(
+                user.uid,
+                {
+                    "username": self.name_input.value,
+                    "email": self.email_input.value,
+                    "gender": self.gender_input.value,
+                    "created_at": datetime.datetime.utcnow().isoformat() + "Z"
+                    # add more fields as you wish, e.g., gender
+                }
+            )
             self.error_message.object = ""
             self.clear_inputs()
             self.update_layout()
