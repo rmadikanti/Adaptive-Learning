@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Adaptive Learning - Sprint Details | Rakesh Madikanti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="wrap">
+    <h1>Sprint Breakdown — Adaptive Learning</h1>
+    <p><a href="index.html">← Back to Portfolio</a></p>
+  </header>
+
+  <main class="wrap">
+    <section id="summary">
+      <h2>User stories</h2>
+        <ol>
+          <li> JSON: Generate and Enhance Structured JSON from Autogen and Sync to Firebase using userid basis
+              (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/issues/399" target="_blank" rel="noopener">Issue link</a>)
+          </li>
+          <li> Implement User-Facing Export Feature for Chat History
+              (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/issues/460" target="_blank" rel="noopener">Issue link</a>)
+          </li>
+        </ol>
+      <br>
+      <h2>Sprint Summary Table</h2>
+      <table>
+        <thead>
+          <tr><th>Sprint</th><th>Objective</th><th>My Key Contributions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Improve JSON-based session tracking, Firebase integration</td><td>Refactored JSON schema; stored sessions per UID; docs (#404, #405)</td></tr>
+          <tr><td>2</td><td>Session restore(on successful login), validation tool(captures logs and reports)</td><td>FSM/agent restore; JSON validation scripts (#406, #407)</td></tr>
+          <tr><td>3</td><td>Security rules and documentation</td><td>Enforced Firestore rules(tested in Emulator); finalized README (#408, #409)</td></tr>
+          <tr><td>4</td><td>User-facing export feature</td><td>Export logic (JSON/CSV/TXT/PDF); UI integration(added export icon) (#461–#468)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="details">
+      <h2>Work done by Sprint</h2>
+
+      <h3>Sprint 1</h3>
+      <ul>
+        <li>Debug current autogen termination issue and fix it.(Session ends when user types "exit" and session history is uploaded to Firebase)</li>
+        <li>Refactored JSON schema (topic, timestamps, roles, messages, suggestions). Sample output file (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/blob/main/progress.json"  target="_blank" rel="noopener">progress.json</a>)</li>
+        <li>Integrated Firestore and stored sessions under authenticated UID. See image in homepage under Screenshots(Firestore: sessions stored per user UID)</li>
+        <li>Developed login/signup flow and migration script with Fernet encryption.
+          Script can be found in repo (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/tree/main/Migration" target="_blank" rel="noopener">Migration script</a>)</li>
+      </ul>
+
+      <h3>Sprint 2</h3>
+      <ul>
+        <li>Implemented session restore (FSM state + agent routing). State can be checked in the progress.json(search for "fsm_state")</li>
+        <li>Wrote validation scripts to scan user sessions and flag invalid fields. Repo link for
+          (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/blob/main/tests/reports/" target="_blank" rel="noopener">Test Reports</a>)</li>
+      </ul>
+
+      <h3>Sprint 3</h3>
+      <ul>
+        <li>Applied UID-based Firestore security rules.</li>
+        <li>Updated documentation with schema and Firebase paths.</li>
+        <li>Documents related to the testing are in the repo. Repo link for
+        (<a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/tree/main/Emulator-Testing" target="_blank" rel="noopener">Emulator Testing</a>)</li>
+      </ul>
+
+      <h3>Sprint 4</h3>
+      <ul>
+        <li>Export icon is added to the UI.</li>
+        <li>Built <code>export.py</code> logic with JSON/CSV/TXT/PDF exporters.</li>
+        <li>Connected export logic to UI. Sample export documents can be found
+          (<a href=https://github.com/Rivier-Computer-Science/Adaptive-Learning/tree/main/Export_Docs target="_blank" rel="noopener">here</a>).</li>
+        <li>Updated the docs. <a href="https://github.com/Rivier-Computer-Science/Adaptive-Learning/blob/main/README.md#su25"> Changes made in SU25</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>© Rakesh Madikanti • Sprint Details Page</p>
+  </footer>
+</body>
+</html>
